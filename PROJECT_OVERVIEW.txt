@@ -1,0 +1,134 @@
+================================================================================
+  MEDOPT — CLINICAL INTELLIGENT SCREENING SYSTEM
+  What This Project Does & Why It Matters
+================================================================================
+
+------------------------------------------------------------------------
+WHAT IS THIS PROJECT?
+------------------------------------------------------------------------
+
+MEDOPT is a clinical disease screening system that uses Meta-Heuristic
+Optimisation (MHO) algorithms to solve three real-world medical problems
+across three disease domains.
+
+In plain words:
+  - You give it patient data (blood test values, voice biomarkers, etc.)
+  - It figures out which tests are actually necessary (not all of them)
+  - It finds the best point at which to say "this person is sick"
+  - It auto-tunes itself to be as accurate as possible
+  - It tells a doctor exactly which patient is at risk and why
+
+The system works for three diseases:
+  1. Parkinson's Disease   — detected using voice biomarkers (22 features)
+  2. Diabetes              — detected using PIMA Indian clinical panel (8 features)
+  3. Heart Disease         — detected using Cleveland cardiac panel (13 features)
+
+------------------------------------------------------------------------
+THE THREE PROBLEMS IT SOLVES
+------------------------------------------------------------------------
+
+PROBLEM 1 — WHICH TESTS DOES A PATIENT ACTUALLY NEED?
+  Medical reality: Doctors order many tests, but not all of them add
+  information. Some features are redundant or noisy.
+
+  What it does: Uses three nature-inspired algorithms (GWO, PSO, WOA)
+  to search through thousands of possible combinations and find the
+  smallest subset of tests that still gives the highest diagnostic accuracy.
+
+  Clinical benefit: Fewer unnecessary tests for patients. Faster screening.
+  More focused clinical attention on the tests that matter.
+
+PROBLEM 2 — WHERE SHOULD THE "SICK / NOT SICK" LINE BE DRAWN?
+  Medical reality: Most classifiers use a fixed decision threshold of 0.5.
+  But in medicine, missing a sick patient (False Negative) is far worse
+  than flagging a healthy one for extra checks.
+
+  What it does: Uses PSO to search for the exact threshold value that
+  maximises sensitivity (catching sick people) while still maintaining
+  acceptable specificity. The threshold is tuned per disease.
+
+  Clinical benefit: Fewer missed diagnoses. Fewer patients sent home who
+  are actually sick. The system prioritises catching the disease.
+
+PROBLEM 4 — HOW SHOULD THE CLASSIFIER ITSELF BE CONFIGURED?
+  Medical reality: Machine learning models like Random Forests have
+  configuration knobs (hyperparameters). The default settings are generic
+  and not tuned for a specific disease dataset.
+
+  What it does: Uses PSO again — but this time it searches through
+  combinations of Random Forest parameters (number of trees, tree depth,
+  minimum samples per split and leaf) using 5-fold cross-validation as
+  the quality measure.
+
+  Clinical benefit: A better-tuned model means higher accuracy, better
+  AUC, and more reliable clinical decisions without any manual tuning.
+
+------------------------------------------------------------------------
+HOW IT IS USEFUL
+------------------------------------------------------------------------
+
+FOR DOCTORS AND CLINICIANS:
+  - Tells you which specific tests to order for a patient
+  - Shows the probability of disease (risk score 0–100)
+  - Explains WHY the system thinks the patient is at risk (SHAP)
+  - Provides a sensitivity-optimised diagnosis threshold
+
+FOR HOSPITAL SYSTEMS:
+  - Reduces unnecessary tests
+  - Speeds up the screening pipeline
+  - Works across multiple diseases from a single interface
+
+FOR RESEARCHERS AND STUDENTS:
+  - Demonstrates how bio-inspired optimisation applies to clinical problems
+  - Shows all three MHO algorithms (GWO, PSO, WOA) working on the same data
+  - Allows side-by-side algorithm comparison across three diseases
+  - Full visualisations: convergence curves, confusion matrices, ROC curves,
+    SHAP feature explanations, hyperparameter comparisons
+
+------------------------------------------------------------------------
+THE DATA USED
+------------------------------------------------------------------------
+
+1. Parkinson's Disease Dataset
+   - Source: UCI Machine Learning Repository
+   - 195 samples, 22 voice biomarker features
+   - Target: status (0 = Healthy, 1 = Parkinson's)
+   - Key features: MDVP jitter, shimmer, HNR, RPDE, DFA, PPE
+
+2. PIMA Indians Diabetes Dataset
+   - Source: Kaggle / UCI
+   - 768 samples, 8 clinical features
+   - Target: Outcome (0 = No Diabetes, 1 = Diabetic)
+   - Key features: Glucose, Insulin, BMI, Diabetes Pedigree Function
+
+3. Cleveland Heart Disease Dataset
+   - Source: UCI Machine Learning Repository
+   - 303 samples, 13 cardiac features
+   - Target: condition (0 = No Disease, 1 = Heart Disease)
+   - Key features: chest pain type, thalach, exang, oldpeak, thal, ca
+
+------------------------------------------------------------------------
+THE TECHNOLOGY STACK
+------------------------------------------------------------------------
+
+  - Python 3.x
+  - Streamlit         — interactive web interface
+  - scikit-learn      — SVC (fitness), RandomForest (main model)
+  - NumPy / Pandas    — numerical computing and data handling
+  - Matplotlib        — all charts and plots
+  - SHAP (optional)   — AI explainability for patient predictions
+
+------------------------------------------------------------------------
+IN SUMMARY
+------------------------------------------------------------------------
+
+MEDOPT takes three classic medical datasets and applies cutting-edge
+bio-inspired optimisation to build a smarter, faster, and more
+interpretable clinical screening pipeline — all accessible through
+a clean, interactive web application built with Streamlit.
+
+It is useful both as a clinical decision support tool and as an
+academic demonstration of how Meta-Heuristic Optimisation algorithms
+can be applied directly to healthcare problems.
+
+================================================================================
